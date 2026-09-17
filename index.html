@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Ajar Interaktif OSN Biologi 2026 - LBB Kelas Pintar Orion</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Virtual Labs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MathJax for Scientific Equation Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        accent: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .gradient-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #14532d 100%);
+        }
+        .tab-btn.active {
+            border-bottom: 3px solid #22c55e;
+            color: #15803d;
+            font-weight: 700;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-emerald-200 selection:text-emerald-900">
+
+    <header class="gradient-header text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/30 text-white text-2xl font-black">
+                        <i class="fa-solid fa-dna animate-pulse"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">OSN BIOLOGI 2026</h1>
+                            <span class="bg-emerald-500/30 border border-emerald-400/30 text-emerald-300 text-xs px-2.5 py-0.5 rounded-full font-semibold">Pro Version</span>
+                        </div>
+                        <p class="text-xs text-emerald-200/80 font-medium">Pengembang: <span class="text-white font-semibold">Tim Penyusun LBB Kelas Pintar Orion</span></p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('pendahuluan')" id="nav-pendahuluan" class="nav-item flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-compass text-emerald-400"></i>
+                        <span>Pendahuluan</span>
+                    </button>
+                    <button onclick="switchTab('materi')" id="nav-materi" class="nav-item flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-book-open text-emerald-400"></i>
+                        <span>Materi Lengkap</span>
+                    </button>
+                    <button onclick="switchTab('lab')" id="nav-lab" class="nav-item flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-flask-vial text-emerald-400"></i>
+                        <span>Lab Virtual</span>
+                    </button>
+                    <button onclick="switchTab('lkpd')" id="nav-lkpd" class="nav-item flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-clipboard-list text-emerald-400"></i>
+                        <span>LKPD</span>
+                    </button>
+                    <button onclick="switchTab('asesmen')" id="nav-asesmen" class="nav-item flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                        <span>Asesmen (25 Soal)</span>
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('pendahuluan')" class="w-full text-left flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">
+                <i class="fa-solid fa-compass text-emerald-400 w-5"></i>
+                <span>Pendahuluan</span>
+            </button>
+            <button onclick="switchTab('materi')" class="w-full text-left flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">
+                <i class="fa-solid fa-book-open text-emerald-400 w-5"></i>
+                <span>Materi Lengkap</span>
+            </button>
+            <button onclick="switchTab('lab')" class="w-full text-left flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">
+                <i class="fa-solid fa-flask-vial text-emerald-400 w-5"></i>
+                <span>Lab Virtual</span>
+            </button>
+            <button onclick="switchTab('lkpd')" class="w-full text-left flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">
+                <i class="fa-solid fa-clipboard-list text-emerald-400 w-5"></i>
+                <span>LKPD</span>
+            </button>
+            <button onclick="switchTab('asesmen')" class="w-full text-left flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-200 hover:bg-slate-800">
+                <i class="fa-solid fa-circle-check text-emerald-400 w-5"></i>
+                <span>Asesmen (25 Soal)</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: PENDAHULUAN -->
+        <section id="sec-pendahuluan" class="tab-content block space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-800 via-teal-900 to-slate-900 text-white p-8 sm:p-12 shadow-2xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-[18rem] pointer-events-none">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-500/20 border border-emerald-400/40 rounded-full px-4 py-1 text-xs font-semibold text-emerald-300">
+                        <i class="fa-solid fa-award"></i>
+                        <span>Modul Persiapan Olimpiade Sains Nasional 2026</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                        Masteri Biologi OSN SMA & IBO Standard
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                        Selamat datang di portal pembinaan interaktif resmi persembahan <strong class="text-white">Tim Penyusun LBB Kelas Pintar Orion</strong>. Portal ini dirancang untuk membekali calon juara OSN Biologi dengan penalaran analitis, penalaran kuantitatif, pemahaman konsep mendalam, dan simulasi laboratorium virtual standar internasional.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <button onclick="switchTab('materi')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-emerald-500/30 transition flex items-center space-x-2">
+                            <span>Mulai Belajar</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchTab('lab')" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold px-6 py-3 rounded-xl transition flex items-center space-x-2">
+                            <i class="fa-solid fa-flask text-emerald-400"></i>
+                            <span>Coba Lab Virtual</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">Pemetaan Silabus & Bobot OSN Biologi 2026</h3>
+                        <p class="text-sm text-slate-500">Standar Puspresnas & International Biology Olympiad (IBO)</p>
+                    </div>
+                    <span class="text-xs bg-slate-200 text-slate-700 font-semibold px-3 py-1 rounded-lg">7 Domain Utama</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">25%</div>
+                            <i class="fa-solid fa-heart-pulse text-2xl text-emerald-500"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Anatomi & Fisiologi Hewan</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Homeostasis, potensial aksi saraf, pertukaran gas & transportasi oksigen, osmoregulasi nefron, respon imun adaptif.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold">20%</div>
+                            <i class="fa-solid fa-vial-virus text-2xl text-blue-500"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">BioSel, Molekuler & Biotek</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Kinetika enzim Michaelis-Menten, dogma sentral, PCR, elektroforesis gel, transpor membran, & respirasi seluler.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">20%</div>
+                            <i class="fa-solid fa-dna text-2xl text-indigo-500"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Genetika & Evolusi</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Hukum Mendel & epistasis, pautan gen, frekuensi alel Hardy-Weinberg, seleksi alam, hanyutan genetik (drift).</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">15%</div>
+                            <i class="fa-solid fa-seedling text-2xl text-amber-500"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Anatomi & Fisiologi Tumbuhan</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Teori kohesi-tensi xilem, fotoperiodisme, respon fitohormon (auksin, sitokinin, ABA), fotosintesis C3/C4/CAM.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                        <div class="p-3 bg-teal-100 text-teal-700 rounded-xl font-black text-lg">10%</div>
+                        <div>
+                            <h5 class="font-bold text-slate-800">Ekologi</h5>
+                            <p class="text-xs text-slate-500">Model logistik $\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)$, indeks Shannon-Wiener.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                        <div class="p-3 bg-purple-100 text-purple-700 rounded-xl font-black text-lg">5%</div>
+                        <div>
+                            <h5 class="font-bold text-slate-800">Biosistematika</h5>
+                            <p class="text-xs text-slate-500">Kladogram, sifat monofiletik, analisis synapomorphy.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                        <div class="p-3 bg-rose-100 text-rose-700 rounded-xl font-black text-lg">5%</div>
+                        <div>
+                            <h5 class="font-bold text-slate-800">Etologi (Perilaku)</h5>
+                            <p class="text-xs text-slate-500">Kin selection (rumus Hamilton $r \cdot B > C$), optimal foraging.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-circle-info text-emerald-600"></i>
+                    <span>Panduan Penggunaan Modul Pembelajaran Interaktif</span>
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-slate-600">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-emerald-700 block mb-1">1. Pelajari Konsep (Materi)</span>
+                        Pahami teori mendalam pada setiap domain topik yang dilengkapi formula dan diagram analitis.
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-emerald-700 block mb-1">2. Eksperimen di Lab</span>
+                        Gunakan simulasi interaktif kinetika enzim & Hukum Hardy-Weinberg untuk mengamati grafik real-time.
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-emerald-700 block mb-1">3. Uji Kemampuan (Asesmen)</span>
+                        Kerjakan 25 soal standar OSN dengan sistem otomatisasi nilai, timer, dan pembahasan komprehensif.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: MATERI LENGKAP -->
+        <section id="sec-materi" class="tab-content hidden space-y-6">
+            <div class="flex space-x-2 border-b border-slate-200 overflow-x-auto custom-scrollbar pb-2">
+                <button onclick="switchSubMateri('materi-biosel')" id="subnav-materi-biosel" class="tab-btn active px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-slate-600 hover:text-emerald-700 transition">
+                    <i class="fa-solid fa-microscope mr-2"></i>BioSel & Molekuler
+                </button>
+                <button onclick="switchSubMateri('materi-fisiologi')" id="subnav-materi-fisiologi" class="tab-btn px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-slate-600 hover:text-emerald-700 transition">
+                    <i class="fa-solid fa-heart-pulse mr-2"></i>Anatomi & Fisiologi
+                </button>
+                <button onclick="switchSubMateri('materi-genetika')" id="subnav-materi-genetika" class="tab-btn px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-slate-600 hover:text-emerald-700 transition">
+                    <i class="fa-solid fa-dna mr-2"></i>Genetika & Evolusi
+                </button>
+                <button onclick="switchSubMateri('materi-ekologi')" id="subnav-materi-ekologi" class="tab-btn px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-slate-600 hover:text-emerald-700 transition">
+                    <i class="fa-solid fa-leaf mr-2"></i>Ekologi & Etologi
+                </button>
+            </div>
+
+            <!-- SUB-TAB 1: BioSel & Molekuler -->
+            <div id="materi-biosel" class="submateri-content block space-y-6">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Modul 01</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Kinetika Enzim & Inhibisi Enzimatik</h3>
+                        <p class="text-slate-500 text-sm">Pemahaman Persamaan Michaelis-Menten dan Mekanisme Inhibitor</p>
+                    </div>
+
+                    <div class="prose max-w-none text-slate-700 space-y-4 text-sm sm:text-base leading-relaxed">
+                        <p>
+                            Enzim merupakan biokatalisator yang mempercepat laju reaksi tanpa mengubah kesetimbangan reaksi. Hubungan antara konsentrasi substrat $[S]$ dan laju reaksi awal ($V_0$) dinyatakan dalam <strong>Persamaan Michaelis-Menten</strong>:
+                        </p>
+
+                        <div class="bg-emerald-900 text-emerald-100 p-6 rounded-2xl shadow-inner text-center font-mono text-lg sm:text-xl space-y-2">
+                            <div>$$V_0 = \frac{V_{max} \cdot [S]}{K_m + [S]}$$</div>
+                            <div class="text-xs font-sans text-emerald-300">
+                                $V_0$: Laju awal | $V_{max}$: Laju maksimum | $K_m$: Konstanta Michaelis (Konsentrasi $[S]$ saat $V_0 = \frac{1}{2}V_{max}$)
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                                <h4 class="font-bold text-emerald-800 text-base mb-2 flex items-center">
+                                    <i class="fa-solid fa-ban mr-2 text-rose-500"></i> Inhibisi Kompetitif
+                                </h4>
+                                <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-600">
+                                    <li>Inhibitor bersaing langsung berebut sisi aktif enzim dengan substrat.</li>
+                                    <li><strong>Efek Kinetika:</strong> Nilai $K_m$ meningkat (afinitas enzim terhadap substrat tampak menurun), sedangkan $V_{max}$ tetap tidak berubah.</li>
+                                    <li>Efek inhibisi dapat diatasi dengan menambah konsentrasi substrat $[S]$ dalam jumlah besar.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                                <h4 class="font-bold text-indigo-800 text-base mb-2 flex items-center">
+                                    <i class="fa-solid fa-lock mr-2 text-indigo-500"></i> Inhibisi Non-Kompetitif
+                                </h4>
+                                <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-slate-600">
+                                    <li>Inhibitor mengikat sisi alosterik (sisi selain sisi aktif), merubah konfirmasi enzim.</li>
+                                    <li><strong>Efek Kinetika:</strong> Nilai $V_{max}$ menurun, sedangkan nilai $K_m$ tetap sama.</li>
+                                    <li>Penambahan substrat $[S]$ tidak dapat memulihkan laju reaksi maksimum ($V_{max}$).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-TAB 2: Fisiologi -->
+            <div id="materi-fisiologi" class="submateri-content hidden space-y-6">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Modul 02</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Anatomi & Fisiologi Sistem Sirkulasi & Saraf</h3>
+                        <p class="text-slate-500 text-sm">Efek Bohr pada Hemoglobin dan Potensial Aksi Membran Saraf</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 space-y-3">
+                            <h4 class="font-bold text-slate-800 text-lg flex items-center text-rose-700">
+                                <i class="fa-solid fa-heart-pulse mr-2"></i> Efek Bohr & Kurva Disosiasi O<sub>2</sub>-Hb
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Efek Bohr menjelaskan penurunan afinitas hemoglobin terhadap oksigen akibat penurunan pH atau peningkatan tekanan parsial CO<sub>2</sub> ($P_{\text{CO}_2}$).
+                            </p>
+                        </div>
+
+                        <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 space-y-3">
+                            <h4 class="font-bold text-slate-800 text-lg flex items-center text-blue-700">
+                                <i class="fa-solid fa-bolt mr-2"></i> Tahapan Potensial Aksi Saraf
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Depolarisasi dan repolarisasi membran akson diatur oleh pembukaan dan penutupan gerbang ion spesifik secara terurut.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-TAB 3: Genetika -->
+            <div id="materi-genetika" class="submateri-content hidden space-y-6">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Modul 03</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Genetika Populasi & Hukum Hardy-Weinberg</h3>
+                        <p class="text-slate-500 text-sm">Model Matematika Frekuensi Genotipe dan Alel dalam Populasi Ideal</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-900 text-white p-5 rounded-2xl font-mono text-center space-y-2">
+                            <div class="text-emerald-400 text-lg font-bold">p + q = 1</div>
+                            <div class="text-xs text-slate-400">Frekuensi Alel Dominan (p) dan Resesif (q)</div>
+                        </div>
+                        <div class="bg-slate-900 text-white p-5 rounded-2xl font-mono text-center space-y-2">
+                            <div class="text-emerald-400 text-lg font-bold">p² + 2pq + q² = 1</div>
+                            <div class="text-xs text-slate-400">Genotipe Homozigot Dominan ($p^2$), Heterozigot ($2pq$), Homozigot Resesif ($q^2$)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-TAB 4: Ekologi -->
+            <div id="materi-ekologi" class="submateri-content hidden space-y-6">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Modul 04</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Dinamika Ekologi Populasi & Etologi Perilaku</h3>
+                        <p class="text-slate-500 text-sm">Model Logistik Pertumbuhan dan Seleksi Kerabat (Kin Selection)</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 space-y-3">
+                            <h4 class="font-bold text-slate-800 text-base text-emerald-700">
+                                <i class="fa-solid fa-chart-line mr-2"></i> Model Pertumbuhan Logistik
+                            </h4>
+                            <div class="bg-slate-900 text-emerald-400 font-mono text-center py-3 rounded-lg font-bold">
+                                $$\frac{dN}{dt} = rN \left(\frac{K - N}{K}\right)$$
+                            </div>
+                        </div>
+                        <div class="p-5 border border-slate-200 rounded-xl bg-slate-50 space-y-3">
+                            <h4 class="font-bold text-slate-800 text-base text-amber-700">
+                                <i class="fa-solid fa-users-viewfinder mr-2"></i> Kin Selection & Aturan Hamilton
+                            </h4>
+                            <div class="bg-slate-900 text-amber-400 font-mono text-center py-3 rounded-lg font-bold">
+                                $$r \cdot B > C$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: LABORATORIUM VIRTUAL -->
+        <section id="sec-lab" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-4 gap-4">
+                    <div>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Lab Interaktif</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1">Simulator Kinetika Enzim & Inhibisi</h3>
+                        <p class="text-sm text-slate-500">Eksperimen pengaruh konsentrasi substrat dan jenis inhibitor terhadap laju reaksi ($V_0$)</p>
+                    </div>
+                    <button onclick="resetLab1()" class="self-start sm:self-auto bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2 border border-slate-300">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>Reset Eksperimen</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Control Panel -->
+                    <div class="lg:col-span-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-6">
+                        <h4 class="font-bold text-slate-800 text-base flex items-center border-b pb-2">
+                            <i class="fa-solid fa-sliders text-emerald-600 mr-2"></i> Variabel Eksperimen
+                        </h4>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <label for="input-vmax" class="text-slate-700">Laju Maksimum Awal ($V_{max}$):</label>
+                                <span id="val-vmax" class="text-emerald-700 font-bold">100 uM/min</span>
+                            </div>
+                            <input type="range" id="input-vmax" min="50" max="200" value="100" step="10" oninput="updateLab1()" class="w-full accent-emerald-600">
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <label for="input-km" class="text-slate-700">Konstanta Michaelis ($K_m$):</label>
+                                <span id="val-km" class="text-emerald-700 font-bold">20 mM</span>
+                            </div>
+                            <input type="range" id="input-km" min="5" max="50" value="20" step="1" oninput="updateLab1()" class="w-full accent-emerald-600">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-700 block">Kondisi Inhibitor:</label>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <label class="flex items-center space-x-2 bg-white p-2.5 rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="inhibitor" value="none" checked onchange="updateLab1()" class="text-emerald-600">
+                                    <span>Kontrol</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-white p-2.5 rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="inhibitor" value="competitive" onchange="updateLab1()" class="text-emerald-600">
+                                    <span>Kompetitif</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-white p-2.5 rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="inhibitor" value="noncompetitive" onchange="updateLab1()" class="text-emerald-600">
+                                    <span>Non-Komp.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-900 text-white p-4 rounded-xl text-xs space-y-2">
+                            <div class="font-bold text-emerald-300 border-b border-emerald-800 pb-1">Hasil Efektif Terukur:</div>
+                            <div class="flex justify-between">
+                                <span>$V_{max}$ Efektif:</span>
+                                <span id="out-vmax" class="font-mono font-bold text-emerald-200">100.0 uM/min</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>$K_m$ Semu / Efektif:</span>
+                                <span id="out-km" class="font-mono font-bold text-emerald-200">20.0 mM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Chart Display -->
+                    <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-inner h-80 relative">
+                            <canvas id="chartLab1"></canvas>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+                            <strong><i class="fa-solid fa-magnifying-glass text-emerald-600 mr-1"></i>Analisis Pengamatan:</strong>
+                            <span id="lab1-analysis">Amati bagaimana kurva bergerak mendekati plateau $V_{max}$. Saat inhibitor kompetitif ditambahkan, nilai $K_m$ membengkak namun $V_{max}$ tetap dapat dicapai pada $[S]$ tinggi.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: LKPD INTERAKTIF -->
+        <section id="sec-lkpd" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-200 pb-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                    <div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Lembar Kerja Terpadu</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1">LKPD Interaktif OSN Biologi 2026</h3>
+                        <p class="text-sm text-slate-500">Penyusun: Tim Penyusun LBB Kelas Pintar Orion</p>
+                    </div>
+                    <button onclick="saveLKPD()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition shadow-md flex items-center space-x-2">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Simpan Jawaban LKPD</span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-800 text-lg flex items-center text-emerald-800">
+                        <i class="fa-solid fa-pen-to-square mr-2"></i> Bagian A: Analisis Grafik Kinetika Enzim
+                    </h4>
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <label class="font-semibold text-slate-800 block">
+                                1. Jelaskan mengapa penambahan substrat $[S]$ dalam jumlah melimpah dapat memulihkan laju reaksi pada sampel yang diberi inhibitor kompetitif, tetapi gagal pada inhibitor non-kompetitif!
+                            </label>
+                            <textarea id="lkpd-q1" rows="3" class="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:outline-none text-xs sm:text-sm" placeholder="Tuliskan jawaban analisis Anda di sini..."></textarea>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <label class="font-semibold text-slate-800 block">
+                                2. Suatu populasi kupu-kupu memiliki 16% individu albino resesif ($aa$). Berapakah frekuensi alel heterozigot ($Aa$) dalam populasi tersebut jika memenuhi syarat Hardy-Weinberg? Tunjukkan langkah perhitungan!
+                            </label>
+                            <textarea id="lkpd-q2" rows="3" class="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:outline-none text-xs sm:text-sm" placeholder="Tuliskan perhitungan dan kesimpulan Anda..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="lkpd-saved-toast" class="hidden bg-emerald-100 border border-emerald-400 text-emerald-800 p-4 rounded-xl text-xs font-semibold flex items-center space-x-2">
+                    <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                    <span>Jawaban LKPD Anda telah disimpan secara lokal dalam sesi aktif browser!</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: ASESMEN 25 SOAL -->
+        <section id="sec-asesmen" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Ujian Simulasi OSN</span>
+                    <h3 class="text-2xl font-bold text-slate-900 mt-1">Asesmen Mandiri (25 Soal OSN/IBO)</h3>
+                    <p class="text-xs text-slate-500">Soal HOTS analitis lengkap dengan skor instan dan pembahasan lengkap.</p>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <div id="timer-box" class="bg-slate-900 text-emerald-400 font-mono font-bold text-base px-4 py-2 rounded-xl border border-slate-800 flex items-center space-x-2">
+                        <i class="fa-solid fa-clock"></i>
+                        <span id="quiz-timer">45:00</span>
+                    </div>
+                    <button onclick="submitQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-lg shadow-emerald-600/30 transition">
+                        Submit & Check Nilai
+                    </button>
+                </div>
+            </div>
+
+            <div id="scorecard" class="hidden bg-gradient-to-r from-emerald-900 to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                    <div>
+                        <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Hasil Evaluasi OSN</span>
+                        <h4 class="text-3xl font-black">Nilai Akhir: <span id="final-score" class="text-emerald-300">0</span> / 100</h4>
+                        <p id="score-feedback" class="text-sm text-slate-300 mt-1">Selesaikan seluruh soal untuk melihat statistik penuh.</p>
+                    </div>
+                    <button onclick="resetQuiz()" class="self-start sm:self-auto bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">
+                        Ulangi Asesmen
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6"></div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 text-xs mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+            <div class="flex justify-center items-center space-x-2 text-white font-bold text-sm">
+                <i class="fa-solid fa-dna text-emerald-500"></i>
+                <span>Tim Penyusun LBB Kelas Pintar Orion</span>
+            </div>
+            <p>© 2026 Modul Pembelajaran Interaktif OSN SMA Biologi. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('bg-slate-800', 'text-white'));
+            
+            const targetSec = document.getElementById(`sec-${tabId}`);
+            if (targetSec) targetSec.classList.remove('hidden');
+
+            const targetNav = document.getElementById(`nav-${tabId}`);
+            if (targetNav) targetNav.classList.add('bg-slate-800', 'text-white');
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            typesetMath();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function switchSubMateri(subId) {
+            document.querySelectorAll('.submateri-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            const targetSub = document.getElementById(subId);
+            if (targetSub) targetSub.classList.remove('hidden');
+
+            const targetBtn = document.getElementById(`subnav-${subId}`);
+            if (targetBtn) targetBtn.classList.add('active');
+
+            typesetMath();
+        }
+
+        let chart1 = null;
+
+        function initLab1() {
+            const canvasEl = document.getElementById('chartLab1');
+            if (!canvasEl) return;
+            
+            const ctx = canvasEl.getContext('2d');
+            chart1 = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [0, 5, 10, 20, 30, 50, 75, 100, 150, 200],
+                    datasets: [{
+                        label: 'Laju Reaksi V0 (uM/min)',
+                        data: [],
+                        borderColor: '#16a34a',
+                        backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: 'Konsentrasi Substrat [S] (mM)' } },
+                        y: { title: { display: true, text: 'Laju Reaksi V0 (uM/min)' }, beginAtZero: true }
+                    }
+                }
+            });
+            updateLab1();
+        }
+
+        function updateLab1() {
+            if (!chart1) return;
+
+            const vmaxBase = parseFloat(document.getElementById('input-vmax').value);
+            const kmBase = parseFloat(document.getElementById('input-km').value);
+            const inhibitor = document.querySelector('input[name="inhibitor"]:checked').value;
+
+            document.getElementById('val-vmax').innerText = `${vmaxBase} uM/min`;
+            document.getElementById('val-km').innerText = `${kmBase} mM`;
+
+            let effVmax = vmaxBase;
+            let effKm = kmBase;
+            let analysisText = "";
+
+            if (inhibitor === 'competitive') {
+                effKm = kmBase * 2.5;
+                analysisText = "Inhibitor kompetitif meningkatkan nilai Km semu (afinitas substrat turun). Namun, Vmax tetap dapat dicapai jika [S] dinaikkan.";
+            } else if (inhibitor === 'noncompetitive') {
+                effVmax = vmaxBase * 0.5;
+                analysisText = "Inhibitor non-kompetitif menurunkan Vmax efektif karena merusak konformasi sisi aktif. Penambahan [S] tidak memulihkan Vmax.";
+            } else {
+                analysisText = "Kondisi kontrol tanpa inhibitor. Kurva menunjukkan kinetika saturasi standar Michaelis-Menten.";
+            }
+
+            document.getElementById('out-vmax').innerText = `${effVmax.toFixed(1)} uM/min`;
+            document.getElementById('out-km').innerText = `${effKm.toFixed(1)} mM`;
+            document.getElementById('lab1-analysis').innerText = analysisText;
+
+            const substrateLevels = [0, 5, 10, 20, 30, 50, 75, 100, 150, 200];
+            const vData = substrateLevels.map(s => (effVmax * s) / (effKm + s));
+
+            chart1.data.datasets[0].data = vData;
+            chart1.update();
+        }
+
+        function resetLab1() {
+            document.getElementById('input-vmax').value = 100;
+            document.getElementById('input-km').value = 20;
+            document.querySelector('input[name="inhibitor"][value="none"]').checked = true;
+            updateLab1();
+        }
+
+        function saveLKPD() {
+            const q1 = document.getElementById('lkpd-q1').value;
+            const q2 = document.getElementById('lkpd-q2').value;
+
+            localStorage.setItem('osn_lkpd_q1', q1);
+            localStorage.setItem('osn_lkpd_q2', q2);
+
+            const toast = document.getElementById('lkpd-saved-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 4000);
+        }
+
+        const quizData = [
+            {
+                id: 1,
+                q: "Sebuah enzim mengalami penurunan laju maksimum (Vmax) dari 100 µmol/min menjadi 50 µmol/min tanpa mengubah nilai Km (20 mM). Jenis penghambatan yang terjadi adalah...",
+                options: ["Inhibisi Kompetitif", "Inhibisi Non-Kompetitif", "Inhibisi Unkompetitif", "Aktivasi Alosterik"],
+                answer: 1,
+                explanation: "Inhibisi non-kompetitif menurunkan nilai Vmax secara permanen karena inhibitor mengikat sisi alosterik, tetapi tidak mengubah afinitas substrat terhadap enzim (Km tetap)."
+            },
+            {
+                id: 2,
+                q: "Penyebab utama terjadinya hiperpolarisasi pada potensial aksi membran akson adalah...",
+                options: ["Inaktivasi saluran Na+ voltage-gated", "Keterlambatan penutupan saluran K+ voltage-gated", "Pompa Na+/K+ ATPase berhenti bekerja", "Masuknya ion Ca2+ secara mendadak"],
+                answer: 1,
+                explanation: "Hiperpolarisasi terjadi karena saluran K+ voltage-gated menutup secara lambat, sehingga ion K+ berlebih terus keluar melebihi potensial istirahat membran (-70 mV)."
+            },
+            {
+                id: 3,
+                q: "Kurva disosiasi oksigen-hemoglobin akan bergeser ke kanan (Efek Bohr) pada kondisi...",
+                options: ["Penurunan suhu tubuh", "Peningkatan pH plasma darah", "Peningkatan konsentrasi CO2 dan penurunan pH", "Penurunan kadar 2,3-BPG"],
+                answer: 2,
+                explanation: "Efek Bohr: Penurunan pH (asidosis) dan peningkatan pCO2 menurunkan afinitas hemoglobin terhadap oksigen, menggeser kurva ke kanan sehingga O2 lebih mudah dilepas ke jaringan metabolik aktif."
+            },
+            {
+                id: 4,
+                q: "Dalam populasi yang memenuhi kesetimbangan Hardy-Weinberg, frekuensi individu albino (autosomal resesif, aa) adalah 4%. Frekuensi individu pembawa (carrier / Aa) adalah...",
+                options: ["0.20 (20%)", "0.32 (32%)", "0.64 (64%)", "0.16 (16%)"],
+                answer: 1,
+                explanation: "q^2 = 0.04 -> q = 0.2. p = 1 - 0.2 = 0.8. Frekuensi heterozigot (2pq) = 2 * (0.8) * (0.2) = 0.32 (32%)."
+            },
+            {
+                id: 5,
+                q: "Hormon tumbuhan yang bekerja secara antagonis terhadap auksin dalam mengontrol dominansi apikal adalah...",
+                options: ["Asam Absisat (ABA)", "Giberelin", "Sitokinin", "Etilen"],
+                answer: 2,
+                explanation: "Sitokinin merangsang pembelahan sel dan pembentukan tunas lateral (ketiak), berlawanan dengan auksin yang mempertahankan dominansi tunas apikal."
+            },
+            {
+                id: 6,
+                q: "Tahap dalam reaksi PCR yang membutuhkan suhu berkisar antara 50°C - 65°C adalah...",
+                options: ["Denaturasi DNA", "Annealing (Penempelan Primer)", "Ekstensi (Elongasi Taq Polymerase)", "Inaktivasi Enzim"],
+                answer: 1,
+                explanation: "Annealing membutuhkan suhu 50-65°C agar primer oligonukleotida dapat menempel spesifik pada rantai tunggal DNA cetakan."
+            },
+            {
+                id: 7,
+                q: "Persamaan pertumbuhan logistik dN/dt = rN((K - N)/K) menunjukkan bahwa laju pertumbuhan populasi mencapai nilai MAKSIMUM ketika populasi bernilai...",
+                options: ["N = K", "N = K/2", "N = 0", "N = 2K"],
+                answer: 1,
+                explanation: "Secara matematis, fungsi dN/dt mencapai puncak sigmoidal maksimum ketika ukuran populasi berada pada setengah daya dukung lingkungan (N = K/2)."
+            },
+            {
+                id: 8,
+                q: "Struktur meristem tumbuhan yang bertanggung jawab atas pertumbuhan sekunder diameter batang dikotil adalah...",
+                options: ["Meristem Apikal", "Kambium Vaskular", "Protoderm", "Prokambium"],
+                answer: 1,
+                explanation: "Kambium vaskular meruapakan meristem lateral yang membelah membentuk xilem sekunder ke arah dalam dan floem sekunder ke arah luar."
+            },
+            {
+                id: 9,
+                q: "Perilaku altruistik seekor individu yang mengorbankan nyawanya demi menyelamatkan 3 saudara kandungnya menguntungkan secara evolusi berdasarkan Rumus Hamilton rB > C karena...",
+                options: ["r = 0.5; B = 3; C = 1 (Nilai 1.5 > 1)", "r = 0.25; B = 3; C = 1", "r = 1.0; B = 3; C = 1", "r = 0.125; B = 3; C = 1"],
+                answer: 0,
+                explanation: "Koefisien kekerabatan (r) saudara kandung = 0.5. Manfaat B = 3 individu. Pengorbanan C = 1 individu. r*B = 0.5 * 3 = 1.5 > C (1)."
+            },
+            {
+                id: 10,
+                q: "Organel sel yang memiliki DNA sirkular dan ribosom subunit 70S sendiri sesuai Teori Endosimbiosis adalah...",
+                options: ["Peroksisom & Lisosom", "Mitochondria & Kloroplas", "Badan Golgi & Retikulum Endoplasma", "Nukleolus & Sentrosom"],
+                answer: 1,
+                explanation: "Mitokondria dan Kloroplas dipercaya berasal dari prokariot endosimbiotik (Alphaproteobacteria dan Cyanobacteria) yang memiliki DNA sirkular dan ribosom 70S sendiri."
+            },
+            {
+                id: 11,
+                q: "Bagian nefron ginjal yang bersifat impermeabel terhadap air tetapi aktif mentranspor ion Na+ dan Cl- keluar adalah...",
+                options: ["Tubulus Kontortus Proksimal", "Lengkung Henle Descending", "Lengkung Henle Ascending Segmen Tebal", "Duktus Pengumpul"],
+                answer: 2,
+                explanation: "Lengkung Henle asenden bersifat kedap air (impermeabel) namun aktif mengangkut NaCl keluar ke interstisium medula untuk membangun gradien osmotik."
+            },
+            {
+                id: 12,
+                q: "Spesiasi yang terjadi akibat adanya rintangan geografis fisik yang memisahkan satu populasi induk menjadi dua adalah...",
+                options: ["Spesiasi Simpatrik", "Spesiasi Allopatrik", "Spesiasi Parapatrik", "Spesiasi Peripatrik"],
+                answer: 1,
+                explanation: "Spesiasi allopatrik terjadi ketika hambatan geografi (sungai, gunung) memisolasi aliran gen antara dua populasi."
+            },
+            {
+                id: 13,
+                q: "Dalam elektroforesis gel agarosa, fragmen DNA akan bergerak menuju kutub...",
+                options: ["Anoda (positif) karena muatan gugus fosfat negatif", "Katoda (negatif) karena muatan basa nitrogen positif", "Anoda (positif) karena muatan gula deoksiribosa positif", "Katoda (negatif) karena muatan basa nitrogen negatif"],
+                answer: 0,
+                explanation: "DNA bermuatan negatif akibat gugus fosfat pada tulang punggungnya, sehingga akan bermigrasi menuju anoda (muatan positif)."
+            },
+            {
+                id: 14,
+                q: "Pada fotosintesis tanaman C4, fiksasi awal CO2 dari udara terjadi di sel...",
+                options: ["Sel Mesofil oleh enzim PEP Karboksilase", "Sel Seludang Pembuluh oleh enzim RuBisCO", "Sel Epidermis oleh enzim Amilase", "Sel Stomata oleh enzim ATP Sintase"],
+                answer: 0,
+                explanation: "Tanaman C4 memfiksasi CO2 di sel mesofil menggunakan enzim PEP karboksilase menghasilkan asam oksaloasetat (4C)."
+            },
+            {
+                id: 15,
+                q: "Kelompok organisme yang memiliki kekerabatan monofiletik didefinisikan sebagai...",
+                options: ["Kelompok yang terdiri dari beberapa nenek moyang berbeda", "Kelompok yang mencakup satu nenek moyang bersama beserta SELURUH keturunannya", "Kelompok yang tidak menyertakan nenek moyang utamanya", "Kelompok yang hanya didasarkan pada analogi fenotipe"],
+                answer: 1,
+                explanation: "Takson monofiletik (klad) terdiri dari satu spesies nenek moyang dan semua keturunan dari nenek moyang tersebut."
+            },
+            {
+                id: 16,
+                q: "Mekanisme utama penggumpalan darah (koagulasi) yang mengubah Fibrinogen menjadi Benang Fibrin dikatalisis oleh enzim...",
+                options: ["Trombin", "Protrombin", "Tromboplastin", "Kalsium"],
+                answer: 0,
+                explanation: "Trombin aktif memotong fibrinogen larut menjadi monomer fibrin tak larut yang membentuk jala pembekuan darah."
+            },
+            {
+                id: 17,
+                q: "Fotosistem II pada reaksi terang fotosintesis menerima pasokan elektron pengganti secara langsung dari proses...",
+                options: ["Fotolisis Air (H2O)", "Fiksasi CO2", "Oksidasi NADPH", "Siklus Calvin"],
+                answer: 0,
+                explanation: "P680 pada Fotosistem II memperoleh kembali elektron yang hilang dari pemecahan molekul air (2 H2O -> O2 + 4H+ + 4e-)."
+            },
+            {
+                id: 18,
+                q: "Fenomena berkurangnya keanekaragaman genetik secara drastis akibat bencana alam yang menyisakan sedikit populasi survivor disebut...",
+                options: ["Founder Effect", "Bottleneck Effect (Efek Leher Botol)", "Gene Flow", "Outbreeding"],
+                answer: 1,
+                explanation: "Bottleneck effect terjadi ketika ukuran populasi merosot tajam secara acak karena bencana, mengurangi variasi alel populasi."
+            },
+            {
+                id: 19,
+                q: "Hormon tumbuhan yang memicu penutupan stomata saat kondisi kekurangan air (stres kekeringan) adalah...",
+                options: ["Auksin", "Giberelin", "Asam Absisat (ABA)", "Etilen"],
+                answer: 2,
+                explanation: "ABA memberi sinyal pada sel penjaga stomata untuk mengeluarkan ion K+, menurunkan tekanan turgor dan menutup pori stomata."
+            },
+            {
+                id: 20,
+                q: "Perilaku hewan berupa pembelajaran asosiatif di mana individu menghubungkan perilaku tertentu dengan hadiah atau hukuman disebut...",
+                options: ["Classical Conditioning", "Operant Conditioning", "Habituasi", "Imprinting"],
+                answer: 1,
+                explanation: "Operant conditioning (trial-and-error learning) menghubungkan aksi spesifik hewan dengan konsekuensi positif (reward) atau negatif (punishment)."
+            },
+            {
+                id: 21,
+                q: "Imunitas spesifik seluler yang menghancurkan sel tubuh yang terinfeksi virus atau sel kanker diperankan oleh...",
+                options: ["Sel T Sitotoksik (CD8+)", "Sel B Plasma", "Makrofag Innate", "Neutrofil"],
+                answer: 0,
+                explanation: "Sel T sitotoksik (CD8+) mengenali antigen asing pada MHC Kelas I dan melepaskan perforin/granzim untuk menginduksi apoptosis sel target."
+            },
+            {
+                id: 22,
+                q: "Bakteri pembusuk yang mengubah senyawa Amonia (NH3) menjadi Nitrit (NO2-) dalam siklus nitrogen adalah...",
+                options: ["Nitrobacter", "Nitrosomonas", "Rhizobium", "Azotobacter"],
+                answer: 1,
+                explanation: "Nitrosomonas / Nitrosococcus mengoksidasi amonia menjadi nitrit (NO2-), yang kemudian dioksidasi lagi menjadi nitrat (NO3-) oleh Nitrobacter."
+            },
+            {
+                id: 23,
+                q: "Ikatan kimia yang menghubungkan basa-basa nitrogen komplementer pada rantai ganda DNA adalah...",
+                options: ["Ikatan Fosfodiester", "Ikatan Hidrogen", "Ikatan Peptida", "Ikatan Glikosida"],
+                answer: 1,
+                explanation: "Rantai komplementer DNA dihubungkan oleh ikatan hidrogen (2 ikatan antara A-T; 3 ikatan antara C-G)."
+            },
+            {
+                id: 24,
+                q: "Mutasi titik yang menyebabkan penggantian basa nitrogen sehingga terbentuk stop kodon prematur dinamakan mutasi...",
+                options: ["Missense Mutation", "Nonsense Mutation", "Silent Mutation", "Frameshift Mutation"],
+                answer: 1,
+                explanation: "Nonsense mutation mengubah kodon asam amino menjadi kodon stop (UAA, UAG, UGA), menghasilkan rantai polipeptida yang terpotong pendek."
+            },
+            {
+                id: 25,
+                q: "Proses masuknya air ke dalam sel tumbuhan melalui saluran protein khusus membran sel dinamakan transpor melalui...",
+                options: ["Aquaporin", "Pompa Natrium", "Endositosis", "Eksositosis"],
+                answer: 0,
+                explanation: "Aquaporin adalah protein kanal membran yang memfasilitasi osmosis molekul air secara cepat menembus membran sel."
+            }
+        ];
+
+        let userAnswers = {};
+        let timerInterval = null;
+        let timeLeft = 45 * 60;
+
+        function typesetMath() {
+            if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+                window.MathJax.typesetPromise().catch((err) => console.log('MathJax error:', err));
+            }
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            if (!container) return;
+            container.innerHTML = "";
+
+            quizData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4";
+                card.id = `q-card-${q.id}`;
+
+                let optionsHtml = "";
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <label class="flex items-start space-x-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition text-xs sm:text-sm">
+                            <input type="radio" name="question-${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="mt-0.5 text-emerald-600 focus:ring-emerald-500">
+                            <span class="text-slate-700">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b pb-3">
+                        <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full">Soal #${idx + 1}</span>
+                        <span class="text-xs text-slate-400 font-medium">OSN SMA Biologi</span>
+                    </div>
+                    <p class="font-semibold text-slate-800 text-sm sm:text-base leading-relaxed">${q.q}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                        ${optionsHtml}
+                    </div>
+                    <div id="explanation-${q.id}" class="hidden mt-4 p-4 rounded-xl bg-slate-900 text-slate-200 text-xs sm:text-sm space-y-2">
+                        <div class="font-bold text-emerald-400 flex items-center">
+                            <i class="fa-solid fa-lightbulb mr-2"></i> Kunci Jawaban & Pembahasan:
+                        </div>
+                        <p class="text-slate-300">${q.explanation}</p>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            typesetMath();
+        }
+
+        function selectAnswer(qId, optionIdx) {
+            userAnswers[qId] = optionIdx;
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                    return;
+                }
+                timeLeft--;
+                const m = Math.floor(timeLeft / 60);
+                const s = timeLeft % 60;
+                const timerEl = document.getElementById('quiz-timer');
+                if (timerEl) {
+                    timerEl.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            let correctCount = 0;
+
+            quizData.forEach(q => {
+                const userAns = userAnswers[q.id];
+                const expBox = document.getElementById(`explanation-${q.id}`);
+                if (expBox) expBox.classList.remove('hidden');
+
+                if (userAns === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const totalScore = Math.round((correctCount / quizData.length) * 100);
+            
+            const scorecard = document.getElementById('scorecard');
+            if (scorecard) {
+                scorecard.classList.remove('hidden');
+                document.getElementById('final-score').innerText = totalScore;
+
+                let feedback = "";
+                if (totalScore >= 80) feedback = "Luar biasa! Pemahaman Anda sudah sangat matang untuk bersaing di tingkat OSN!";
+                else if (totalScore >= 60) feedback = "Bagus! Pelajari kembali materi kinetika enzim, genetika populasi, dan anatomi fisiologi.";
+                else feedback = "Tetap semangat! Review kembali materi modul dan manfaatkan Laboratorium Virtual.";
+
+                document.getElementById('score-feedback').innerText = feedback;
+                window.scrollTo({ top: scorecard.offsetTop - 100, behavior: 'smooth' });
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            timeLeft = 45 * 60;
+            const scorecard = document.getElementById('scorecard');
+            if (scorecard) scorecard.classList.add('hidden');
+            renderQuiz();
+            startTimer();
+        }
+
+        window.onload = function() {
+            initLab1();
+            renderQuiz();
+            startTimer();
+        };
+    </script>
+</body>
+</html>
